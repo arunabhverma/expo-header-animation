@@ -1,7 +1,7 @@
 import { useScrollContext } from "@/contexts/scroll-context";
 import { useTheme } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
@@ -20,6 +20,7 @@ export const AnimatedHeaderTitle = ({
   subTitle?: string;
 }) => {
   const theme = useTheme();
+  const subTitleWidth = useSharedValue(0);
   const { scrollY, extraSpace, titleHeight } = useScrollContext();
   const headerOffset = useSharedValue(0);
 
@@ -71,8 +72,21 @@ export const AnimatedHeaderTitle = ({
       Extrapolation.CLAMP
     );
 
+    const translateX = interpolate(
+      scale,
+      [0.75, 1],
+      [(1 - 0.75) * -(subTitleWidth.value / 1.5), 0],
+      Extrapolation.CLAMP
+    );
+
     return {
-      transform: [{ translateY: headerOffset.value }, { scale }],
+      transform: [
+        { translateY: headerOffset.value },
+        { scale },
+        Platform.OS === "android"
+          ? { translateX: translateX }
+          : { translateX: 0 },
+      ],
       opacity,
     };
   });
@@ -105,6 +119,9 @@ export const AnimatedHeaderTitle = ({
         {title}
       </Animated.Text>
       <Animated.Text
+        onLayout={(e) => {
+          subTitleWidth.value = e.nativeEvent.layout.width;
+        }}
         style={[
           styles.headerTitle,
           animatedSubTextStyle,
@@ -126,6 +143,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 17,
     fontWeight: "600",
-    textAlign: "center",
+    textAlign: Platform.select({ android: "left", ios: "center" }),
+    alignSelf: Platform.select({ android: "flex-start", ios: "center" }),
   },
 });
