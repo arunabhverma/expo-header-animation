@@ -1,50 +1,66 @@
-# Welcome to your Expo app 👋
+# 🚀 Expo Header-Subtitle Animation
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A smooth React Native demo showcasing **scroll-driven header animations** where the main title shrinks upward and a subtitle seamlessly fades and slides into place.
 
-## Get started
+## Demo
 
-1. Install dependencies
+Check out the animated header in action 👇:
 
-   ```bash
-   npm install
-   ```
+| iOS                  |
+| ------------------------------ |
+| <video src="https://github.com/user-attachments/assets/f57a8bd8-f53b-491a-9a2e-1a9acd31ae8e" /> |
 
-2. Start the app
 
-   ```bash
-   npx expo start
-   ```
+## ✨ What It Does
 
-In the output, you'll find options to open the app in a
+This interactive demo creates a fluid header animation where:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+* **Always-Visible Title**: The main header title stays at the top
+* **Disappearing Username**: Username fades out as it scrolls away behind the header
+* **Subtitle Reveal**: A subtitle animates upward from below with a smooth fade-in
+* **Dynamic Title Adjustment**: Title shrinks slightly and shifts upward to make space for the subtitle
+* **Scroll-Driven Illusion**: All transitions are tied to scroll position for natural, seamless movement
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🔧 How It Works
 
-## Get a fresh project
+The animation is powered by **React Native Reanimated v3** with interpolation and shared values:
 
-When you're ready, run:
+### Header Transition System
 
-```bash
-npm run reset-project
-```
+* **Scroll-Based Interpolation**: Maps scroll values to transformations
+* **Title Scaling & Translation**: Title shrinks from `scale(1)` to \~`scale(0.9)` and shifts upward
+* **Subtitle Entrance**: Subtitle starts off-screen with opacity 0, slides upward, and fades in
+* **Clamped Extrapolation**: Prevents overshooting when scrolling too far
+* **UI Thread Execution**: All worklets run at 60fps for ultra-smooth performance
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Animation Flow
 
-## Learn more
+1. Scroll begins → as username goes behind the header
+2. Subtitle animates upward from the edge to the header
+3. Title shifts upward and shrinks slightly
+4. Subtitle settles neatly under the title, completing the illusion
 
-To learn more about developing your project with Expo, look at the following resources:
+### 🎯 Feel Free To
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+* Fork this repository and adapt the animation for your own app
+* Use it as a starting point for more advanced header transitions
+* Learn from the interpolation techniques and shared values
 
-## Join the community
+## 🤝 Contributing
 
-Join our community of developers creating universal apps.
+Contributions are welcome! Feel free to:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+* Submit PRs with improvements
+* Share new variations of the animation
+* Suggest refinements to make it more flexible
+
+## 📚 Learn More
+
+* [Expo Documentation](https://docs.expo.dev/)
+* [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)
+
+---
+
+**Happy coding! 🎉** Create beautiful, scroll-driven header animations with Expo & Reanimated.
+
+---
